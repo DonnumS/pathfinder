@@ -30,6 +30,7 @@ export default class NavBar extends Component {
       onBFS,
       onASTAR,
       onClearPathPressed,
+      onClearAllPressed,
     } = this.props;
 
     return (
@@ -44,6 +45,13 @@ export default class NavBar extends Component {
             Pathfinding Visualizer
           </Menu.Item>
           <Menu.Item position="centre">
+            <Button
+              style={{ marginRight: 16 }}
+              color="orange"
+              onClick={() => onClearAllPressed()}
+            >
+              Clear Everything
+            </Button>
             <Button
               style={{ marginRight: 16 }}
               color="orange"

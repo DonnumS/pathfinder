@@ -8,8 +8,8 @@ import "./PathfindingVisualizer.css";
 
 const START_NODE_ROW = 3;
 const START_NODE_COL = 5;
-const FINISH_NODE_ROW = 18;
-const FINISH_NODE_COL = 42;
+const FINISH_NODE_ROW = 3;
+const FINISH_NODE_COL = 10;
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -68,6 +68,7 @@ export default class PathfindingVisualizer extends Component {
 
   // Used to visualize dijkstra, simple version
   visualizeDijkstra() {
+    this.removePath(false);
     console.log("Pressed Dijkstra");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
@@ -79,6 +80,7 @@ export default class PathfindingVisualizer extends Component {
 
   // Used to visualize DFS
   visualizeDFS() {
+    this.removePath(false);
     console.log("Pressed DFS");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
@@ -97,16 +99,34 @@ export default class PathfindingVisualizer extends Component {
   }
 
   // Clears path, but currently also clears node start and finish from the board
-  clearAllPaths() {
+  clearPath() {
     this.setState({ grid: [] });
     const grid = getInitialGrid();
     this.setState({ grid });
   }
 
-  removePath(node) {
-    document
-      .getElementById(`node-${node.row}-${node.col}`)
-      .classList.remove("node-shortest-path");
+  removePath(all) {
+    const { grid } = this.state;
+    for (let row = 0; row < 20; row++) {
+      for (let col = 0; col < 50; col++) {
+        const node = grid[row][col];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node";
+        if (row === START_NODE_ROW && col === START_NODE_COL) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-start";
+        } else if (row === FINISH_NODE_ROW && col === FINISH_NODE_COL) {
+          grid[row][col] = createNode(col, row);
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-finish";
+        } else if (grid[row][col].isWall && !all) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-wall";
+        } else {
+          grid[row][col] = createNode(col, row);
+        }
+      }
+    }
   }
 
   render() {
@@ -117,7 +137,8 @@ export default class PathfindingVisualizer extends Component {
         <NavBar
           onDijkstra={() => this.visualizeDijkstra()}
           onDFS={() => this.visualizeDFS()}
-          onClearPathPressed={() => this.clearPath()}
+          onClearPathPressed={() => this.removePath(false)}
+          onClearAllPressed={() => this.removePath(true)}
         />
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -172,6 +193,19 @@ const createNode = (col, row) => {
     distance: Infinity,
     isVisited: false,
     isWall: false,
+    previousNode: null,
+  };
+};
+
+const createExtraNode = (col, row, isWall) => {
+  return {
+    col,
+    row,
+    isStart: row === START_NODE_ROW && col === START_NODE_COL,
+    isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
+    distance: Infinity,
+    isVisited: false,
+    isWall: isWall,
     previousNode: null,
   };
 };

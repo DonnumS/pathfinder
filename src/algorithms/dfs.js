@@ -34,7 +34,7 @@ function getNeighbors(grid, currentNode, width, height) {
   const neighbors = [];
   const row = currentNode.row;
   const col = currentNode.col;
-  var directions = [4, 2, 3, 1];
+  var directions = [2, 4, 3, 1];
   for (let i = 0; i < directions.length; i++) {
     switch (directions[i]) {
       case 1:
