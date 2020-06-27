@@ -28,7 +28,7 @@ export default class NavBar extends Component {
       onDijkstra,
       onDFS,
       onBFS,
-      onASTAR,
+      onAStar,
       onClearPathPressed,
       onClearAllPressed,
     } = this.props;
@@ -85,7 +85,7 @@ export default class NavBar extends Component {
             <Button
               style={{ marginRight: 16 }}
               color="red"
-              onClick={() => onASTAR()}
+              onClick={() => onAStar()}
             >
               Visualize A*
             </Button>

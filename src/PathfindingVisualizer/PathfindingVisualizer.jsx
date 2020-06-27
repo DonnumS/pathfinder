@@ -3,13 +3,15 @@ import Node from "./Node/Node";
 import NavBar from "../utils/NavBar";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { DFS, getShortestDFSPath } from "../algorithms/dfs";
+import { BFS, getShortestBFSPath } from "../algorithms/bfs";
+import { astar } from "../algorithms/a*";
 
 import "./PathfindingVisualizer.css";
 
-const START_NODE_ROW = 3;
+const START_NODE_ROW = 10;
 const START_NODE_COL = 5;
-const FINISH_NODE_ROW = 3;
-const FINISH_NODE_COL = 10;
+const FINISH_NODE_ROW = 10;
+const FINISH_NODE_COL = 40;
 
 export default class PathfindingVisualizer extends Component {
   constructor() {
@@ -17,6 +19,8 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseIsPressed: false,
+      finishIsPressed: false,
+      startIsPressed: false,
     };
   }
 
@@ -96,6 +100,19 @@ export default class PathfindingVisualizer extends Component {
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = BFS(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getShortestBFSPath(finishNode);
+    this.animateVisited(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+
+  visualizeAStar() {
+    console.log("A*");
+    const { grid } = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = astar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateVisited(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
   // Clears path, but currently also clears node start and finish from the board
@@ -137,6 +154,8 @@ export default class PathfindingVisualizer extends Component {
         <NavBar
           onDijkstra={() => this.visualizeDijkstra()}
           onDFS={() => this.visualizeDFS()}
+          onBFS={() => this.visualizeBFS()}
+          onAStar={() => this.visualizeAStar()}
           onClearPathPressed={() => this.removePath(false)}
           onClearAllPressed={() => this.removePath(true)}
         />
@@ -193,19 +212,6 @@ const createNode = (col, row) => {
     distance: Infinity,
     isVisited: false,
     isWall: false,
-    previousNode: null,
-  };
-};
-
-const createExtraNode = (col, row, isWall) => {
-  return {
-    col,
-    row,
-    isStart: row === START_NODE_ROW && col === START_NODE_COL,
-    isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-    distance: Infinity,
-    isVisited: false,
-    isWall: isWall,
     previousNode: null,
   };
 };
