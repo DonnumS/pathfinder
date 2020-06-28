@@ -1,0 +1,29 @@
+<Button
+              style={{ marginRight: 16 }}
+              color="red"
+              onClick={() => onDijkstra()}
+            >
+              Visualize Dijkstra
+            </Button>
+
+            <Button
+              style={{ marginRight: 16 }}
+              color="red"
+              onClick={() => onDFS()}
+            >
+              Visualize DFS
+            </Button>
+            <Button
+              style={{ marginRight: 16 }}
+              color="red"
+              onClick={() => onBFS()}
+            >
+              Visualize BFS
+            </Button>
+            <Button
+              style={{ marginRight: 16 }}
+              color="red"
+              onClick={() => onAStar()}
+            >
+              Visualize A*
+            </Button>

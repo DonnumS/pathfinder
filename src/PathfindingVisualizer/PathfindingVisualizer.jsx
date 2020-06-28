@@ -44,6 +44,7 @@ export default class PathfindingVisualizer extends Component {
     this.setState({ mouseIsPressed: false });
   }
 
+  // Animates the order in which all visited nodes where visited
   animateVisited(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
@@ -60,6 +61,7 @@ export default class PathfindingVisualizer extends Component {
     }
   }
 
+  // Animates the shortest path
   animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
@@ -73,7 +75,7 @@ export default class PathfindingVisualizer extends Component {
   // Used to visualize dijkstra, simple version
   visualizeDijkstra() {
     this.removePath(false);
-    console.log("Pressed Dijkstra");
+    console.log("1 = Dijkstra");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -85,7 +87,7 @@ export default class PathfindingVisualizer extends Component {
   // Used to visualize DFS
   visualizeDFS() {
     this.removePath(false);
-    console.log("Pressed DFS");
+    console.log("2 = DFS");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -96,7 +98,8 @@ export default class PathfindingVisualizer extends Component {
 
   // Used to visualize BFS
   visualizeBFS() {
-    console.log("BFS");
+    this.removePath(false);
+    console.log("3 = BFS");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -105,8 +108,10 @@ export default class PathfindingVisualizer extends Component {
     this.animateVisited(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
+  // Used to visualize A*
   visualizeAStar() {
-    console.log("A*");
+    this.removePath(false);
+    console.log("4 = A*");
     const { grid } = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -122,6 +127,7 @@ export default class PathfindingVisualizer extends Component {
     this.setState({ grid });
   }
 
+  // Used to remove path or remove path and all walls
   removePath(all) {
     const { grid } = this.state;
     for (let row = 0; row < 20; row++) {
@@ -146,16 +152,27 @@ export default class PathfindingVisualizer extends Component {
     }
   }
 
+  // Run desired algorithm given value from dropdown menu
+  runAlgo(algoNum) {
+    console.log(`Run algo ${algoNum}`);
+    if (algoNum == 1) {
+      this.visualizeDijkstra();
+    } else if (algoNum == 2) {
+      this.visualizeDFS();
+    } else if (algoNum == 3) {
+      this.visualizeBFS();
+    } else if (algoNum == 4) {
+      this.visualizeAStar();
+    }
+  }
+
   render() {
     const { grid, mouseIsPressed } = this.state;
 
     return (
       <div>
         <NavBar
-          onDijkstra={() => this.visualizeDijkstra()}
-          onDFS={() => this.visualizeDFS()}
-          onBFS={() => this.visualizeBFS()}
-          onAStar={() => this.visualizeAStar()}
+          chosenAlgo={(value) => this.runAlgo(value)}
           onClearPathPressed={() => this.removePath(false)}
           onClearAllPressed={() => this.removePath(true)}
         />

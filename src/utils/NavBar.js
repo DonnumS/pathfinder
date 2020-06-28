@@ -13,25 +13,42 @@ import {
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
+const algoOptions = [
+  {
+    key: "Dijkstra",
+    text: "Dijkstra",
+    value: "1",
+  },
+  {
+    key: "DFS",
+    text: "DFS",
+    value: "2",
+  },
+  {
+    key: "BFS",
+    text: "BFS",
+    value: "3",
+  },
+  {
+    key: "AStar",
+    text: "A*",
+    value: "4",
+  },
+];
+
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  handleChange = (e, { value }) => this.setState({ value });
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
 
   render() {
-    const { fixed } = this.state;
-    const {
-      onDijkstra,
-      onDFS,
-      onBFS,
-      onAStar,
-      onClearPathPressed,
-      onClearAllPressed,
-    } = this.props;
+    const { value } = this.state;
+    const { chosenAlgo, onClearPathPressed, onClearAllPressed } = this.props;
 
     return (
       <Menu fixed="top" inverted style={{ backgroundColor: "#061830" }}>
@@ -45,49 +62,33 @@ export default class NavBar extends Component {
             Pathfinding Visualizer
           </Menu.Item>
           <Menu.Item position="centre">
+            <Dropdown
+              onChange={this.handleChange}
+              options={algoOptions}
+              placeholder="Select algorithm"
+              selection
+              value={value}
+            />
             <Button
-              style={{ marginRight: 16 }}
+              style={{ marginLeft: 16 }}
+              color="red"
+              onClick={() => chosenAlgo(value)}
+            >
+              Run
+            </Button>
+            <Button
+              style={{ marginLeft: 16 }}
               color="orange"
               onClick={() => onClearAllPressed()}
             >
               Clear Everything
             </Button>
             <Button
-              style={{ marginRight: 16 }}
+              style={{ marginLeft: 16 }}
               color="orange"
               onClick={() => onClearPathPressed()}
             >
               Clear Path
-            </Button>
-
-            <Button
-              style={{ marginRight: 16 }}
-              color="red"
-              onClick={() => onDijkstra()}
-            >
-              Visualize Dijkstra
-            </Button>
-
-            <Button
-              style={{ marginRight: 16 }}
-              color="red"
-              onClick={() => onDFS()}
-            >
-              Visualize DFS
-            </Button>
-            <Button
-              style={{ marginRight: 16 }}
-              color="red"
-              onClick={() => onBFS()}
-            >
-              Visualize BFS
-            </Button>
-            <Button
-              style={{ marginRight: 16 }}
-              color="red"
-              onClick={() => onAStar()}
-            >
-              Visualize A*
             </Button>
           </Menu.Item>
         </Container>
