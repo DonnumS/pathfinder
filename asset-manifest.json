@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/pathfinder/static/css/main.4cd28a58.chunk.css",
+    "main.js": "/pathfinder/static/js/main.c1b2dfdf.chunk.js",
+    "main.js.map": "/pathfinder/static/js/main.c1b2dfdf.chunk.js.map",
+    "runtime-main.js": "/pathfinder/static/js/runtime-main.30ba78f0.js",
+    "runtime-main.js.map": "/pathfinder/static/js/runtime-main.30ba78f0.js.map",
+    "static/css/2.1fc1c71e.chunk.css": "/pathfinder/static/css/2.1fc1c71e.chunk.css",
+    "static/js/2.035567e0.chunk.js": "/pathfinder/static/js/2.035567e0.chunk.js",
+    "static/js/2.035567e0.chunk.js.map": "/pathfinder/static/js/2.035567e0.chunk.js.map",
+    "index.html": "/pathfinder/index.html",
+    "precache-manifest.d7f40f975e75ab8da19058a3bda378df.js": "/pathfinder/precache-manifest.d7f40f975e75ab8da19058a3bda378df.js",
+    "service-worker.js": "/pathfinder/service-worker.js",
+    "static/css/2.1fc1c71e.chunk.css.map": "/pathfinder/static/css/2.1fc1c71e.chunk.css.map",
+    "static/css/main.4cd28a58.chunk.css.map": "/pathfinder/static/css/main.4cd28a58.chunk.css.map",
+    "static/js/2.035567e0.chunk.js.LICENSE.txt": "/pathfinder/static/js/2.035567e0.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/pathfinder/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/compass.png": "/pathfinder/static/media/compass.c7899a90.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.30ba78f0.js",
+    "static/css/2.1fc1c71e.chunk.css",
+    "static/js/2.035567e0.chunk.js",
+    "static/css/main.4cd28a58.chunk.css",
+    "static/js/main.c1b2dfdf.chunk.js"
+  ]
+}
