@@ -71,7 +71,7 @@ export default class NavBar extends Component {
             />
             <Button
               style={{ marginLeft: 16 }}
-              color="red"
+              color="green"
               onClick={() => chosenAlgo(value)}
             >
               Run
