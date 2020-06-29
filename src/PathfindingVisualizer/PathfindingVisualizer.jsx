@@ -5,6 +5,7 @@ import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { DFS, getShortestDFSPath } from "../algorithms/dfs";
 import { BFS, getShortestBFSPath } from "../algorithms/bfs";
 import { astar } from "../algorithms/a*";
+import { greedyBFS } from "../algorithms/greedybfs";
 
 import "./PathfindingVisualizer.css";
 
@@ -120,6 +121,17 @@ export default class PathfindingVisualizer extends Component {
     this.animateVisited(visitedNodesInOrder, nodesInShortestPathOrder);
   }
 
+  visualizeGBFS() {
+    this.removePath(false);
+    console.log("4 = A*");
+    const { grid } = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const visitedNodesInOrder = greedyBFS(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+    this.animateVisited(visitedNodesInOrder, nodesInShortestPathOrder);
+  }
+
   // Clears path, but currently also clears node start and finish from the board
   clearPath() {
     this.setState({ grid: [] });
@@ -163,6 +175,8 @@ export default class PathfindingVisualizer extends Component {
       this.visualizeBFS();
     } else if (algoNum == 4) {
       this.visualizeAStar();
+    } else if (algoNum == 5) {
+      this.visualizeGBFS();
     }
   }
 

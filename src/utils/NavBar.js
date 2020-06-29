@@ -34,6 +34,11 @@ const algoOptions = [
     text: "A*",
     value: "4",
   },
+  {
+    key: "Greedy Best First Search",
+    text: "Greedy Best First Search",
+    value: "5",
+  },
 ];
 
 export default class NavBar extends Component {
