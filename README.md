@@ -23,4 +23,4 @@ These are the currently planned pathfinding algorithms I will implement
 - [x] DFS
 - [x] BFS
 - [x] AStar
-- [ ] Greedy Best First Search
+- [x] Greedy Best First Search
