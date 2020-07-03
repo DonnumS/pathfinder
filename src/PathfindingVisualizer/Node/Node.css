@@ -6,11 +6,19 @@
 }
 
 .node-finish {
-  background-color: red;
+  background-image: url("../../assets/finish.png");
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: center;
 }
 
 .node-start {
-  background-color: green;
+  background-image: url("../../assets/start.png");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: center;
 }
 
 .node-visited {
